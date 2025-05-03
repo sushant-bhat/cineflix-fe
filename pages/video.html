@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Cineflix</title>
+</head>
+<body>
+    <header>
+        <a href="/">Back</a>
+        <nav id="nav">
+            <div id="nav-search">
+                <img id="search-logo" src="/images/search.png" alt="Search icon">
+                <input id="nav-search-q" type="text" placeholder="Search..." autocomplete="off">
+            </div>
+            <ul id="nav-links">
+                <li><a href="">Categories</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="video-player-section">
+            <video id="hls-video" width="500px"  controls></video>
+            <!-- <video id="stream-video" src="http://localhost:8080/api/v1/video/5c7d17c0-0170-47c9-9978-7dbcdd6d3c44/stream" poster="http://localhost:8080/api/v1/video/5c7d17c0-0170-47c9-9978-7dbcdd6d3c44/thumb" width="500px" controls></video> -->
+        </section>
+        <section id="video-info"></section>
+    </main>
+</body>
+<script src="/js/common.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="/js/video.js"></script>
+</html>

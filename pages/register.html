@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body>
+    <p id="register-msg"></p>
+    <form id="register-form" method="post">
+        <input type="text" name="username" id="username">
+        <input type="password" name="password" id="password">
+        <select name="userRole" id="user-role" required>
+            <option value="USER">User</option>
+            <option value="CREATOR">Creator</option>
+        </select>
+        <button type="submit">Register</button>
+    </form>
+    <p>Not a member? <a href="/pages/login.html">Login</a></p>
+</body>
+<script src="/js/loginregister.js"></script>
+
+</html>

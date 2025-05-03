@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/uploadform.css">
+    <title>Cineflix</title>
+</head>
+<body>
+    <header>
+        <a href="/">Back</a>
+        <nav id="nav">
+            <div id="nav-search">
+                <img id="search-logo" src="/images/search.png" alt="Search icon">
+                <input id="nav-search-q" type="text" placeholder="Search..." autocomplete="off">
+            </div>
+            <ul id="nav-links">
+                <li><a href="">Categories</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form id="upload-form" method="post" enctype="multipart/form-data">
+            <input type="text" name="videoTitle" id="video-title" placeholder="Title" required>
+            <textarea name="videoDescription" id="video-descr" rows="10" placeholder="Description..." required></textarea>
+            <textarea name="videoCast" id="video-cast" rows="10" placeholder="Enter each actor name on separate line..." required></textarea>
+            <input type="text" name="videoDirector" id="video-director" placeholder="Director Name..." required/>
+            <div>
+                <label for="video-tags">Select tags:</label>
+                <select name="videoTags" id="video-tags" multiple required>
+                    <option value="action">Action</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="thriller">Thriller</option>
+                    <option value="romcom">Rom-Com</option>
+                    <option value="darkcomedy">Dark Comedy</option>
+                    <option value="horror">Horror</option>
+                </select>
+            </div>
+            <input type="file" id="video-img" name="thumbnail" accept="image/*" required>
+            <!-- Make thumbnail optional, to pick up the first frame of video if not present -->
+            <input type="file" id="video-vid" name="file" accept="video/*" required>
+            <button type="submit">Upload</button>
+        </form>
+    </main>
+</body>
+<script src="/js/common.js"></script>
+<script src="/js/uploadvideo.js"></script>
+</html>

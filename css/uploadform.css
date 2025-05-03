@@ -1,0 +1,16 @@
+@import url(main.css);
+
+
+#upload-form {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-width: 7rem;
+    width: 50%;
+    margin: auto;
+}
+
+#upload-form > input, textarea {
+    padding: 0.5em;
+}
