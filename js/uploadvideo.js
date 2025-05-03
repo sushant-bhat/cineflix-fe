@@ -1,3 +1,22 @@
+window.onload = async () => {
+  const atoken = localStorage.getItem("atoken")
+
+  await fetch(`http://localhost:8080/category`, {
+      headers: {
+        "Authorization": `Bearer ${atoken}`
+      }
+    }).then(resp => resp.json())
+    .then(data => {
+      const videoTags = document.getElementById("video-tags")
+      data.categories.forEach(element => {
+        let catOption = document.createElement("option")
+        catOption.value = element.name
+        catOption.innerHTML = element.name.toUpperCase()
+        videoTags.appendChild(catOption)
+      })
+    })
+}
+
 document.getElementById('upload-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 

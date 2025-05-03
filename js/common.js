@@ -6,21 +6,35 @@ if (!atoken) {
 
 let navLinks = document.getElementById("nav-links")
 if (navLinks) {
-    let li = document.createElement("li")
+    let categoriesNav = document.createElement("li")
+    let categoriesLink = document.createElement("a")
+    categoriesLink.innerHTML = "Categories"
+    categoriesLink.addEventListener("click", () => {
+        document.getElementById("cat-list").classList.toggle("hidden")
+    })
+    categoriesNav.appendChild(categoriesLink)
+    let categoryList = document.createElement("ul")
+    categoryList.setAttribute("id", "cat-list")
+    categoryList.classList.add("hidden")
+    generateCategoryLinks(categoryList)
+    categoriesNav.appendChild(categoryList)
+    navLinks.appendChild(categoriesNav)
+
+    let accountNav = document.createElement("li")
     let accountLink = document.createElement("a")
     accountLink.href = "/pages/account.html"
     accountLink.innerHTML = localStorage.getItem("username")
-    li.appendChild(accountLink)
-    navLinks.appendChild(li)
+    accountNav.appendChild(accountLink)
+    navLinks.appendChild(accountNav)
 
     const role = localStorage.getItem("role")
     if (role === "CREATOR") {
-        let li = document.createElement("li")
+        let uploadNav = document.createElement("li")
         let uploadLink = document.createElement("a")
         uploadLink.href = "/pages/uploadform.html"
         uploadLink.innerHTML = "+Upload"
-        li.appendChild(uploadLink)
-        navLinks.appendChild(uploadLink)
+        uploadNav.appendChild(uploadLink)
+        navLinks.appendChild(uploadNav)
     }
 
     let logoutBtn = document.createElement("button")
@@ -40,4 +54,57 @@ if (searchBar) {
             window.location.href = `/pages/searchresults.html?q=${encodeURIComponent(query)}`
         }
     })
+}
+
+async function generateCategoryLinks(categoryList) {
+    await fetch(`http://localhost:8080/category`, {
+        headers: {
+            "Authorization": `Bearer ${atoken}`
+        }
+    })
+    .then(resp => resp.json())
+    .then(data => {
+        data.categories.forEach(element => {
+            let catItem = document.createElement("li")
+            let catAnchor = document.createElement("a")
+            catAnchor.href = `/pages/catresults.html?cat=${element.name}`
+            catAnchor.innerHTML = element.name
+            catItem.appendChild(catAnchor)
+        
+            categoryList.appendChild(catItem)
+        })
+    })
+
+}
+
+async function generateVideoTile(videoInfo, atoken) {
+    let li = document.createElement("li")
+
+    let anchor = document.createElement("a")
+    anchor.setAttribute("href", `/pages/video.html?id=${encodeURIComponent(videoInfo.videoId)}`)
+
+    let image = document.createElement("img")
+    await fetch(`http://localhost:8080/api/v1/video/${videoInfo.videoId}/thumb`, {
+            headers: {
+                "Authorization": `Bearer ${atoken}`
+            }
+        }).then(response => response.blob())
+        .then(blob => {
+            const imageUrl = URL.createObjectURL(blob);
+            image.src = imageUrl;
+        })
+    image.classList.add("thumbnail-img")
+    anchor.appendChild(image)
+
+    let heading = document.createElement("h3")
+    heading.innerHTML = videoInfo.videoTitle
+    anchor.appendChild(heading)
+
+    let addBtn = document.createElement("button")
+    addBtn.classList.add("add-btn")
+    addBtn.innerHTML = "+ Add"
+    anchor.appendChild(addBtn)
+
+    li.appendChild(anchor)
+    return li
 }

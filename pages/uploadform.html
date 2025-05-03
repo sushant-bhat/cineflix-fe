@@ -14,9 +14,7 @@
                 <img id="search-logo" src="/images/search.png" alt="Search icon">
                 <input id="nav-search-q" type="text" placeholder="Search..." autocomplete="off">
             </div>
-            <ul id="nav-links">
-                <li><a href="">Categories</a></li>
-            </ul>
+            <ul id="nav-links"></ul>
         </nav>
     </header>
     <main>
@@ -27,14 +25,7 @@
             <input type="text" name="videoDirector" id="video-director" placeholder="Director Name..." required/>
             <div>
                 <label for="video-tags">Select tags:</label>
-                <select name="videoTags" id="video-tags" multiple required>
-                    <option value="action">Action</option>
-                    <option value="comedy">Comedy</option>
-                    <option value="thriller">Thriller</option>
-                    <option value="romcom">Rom-Com</option>
-                    <option value="darkcomedy">Dark Comedy</option>
-                    <option value="horror">Horror</option>
-                </select>
+                <select name="videoTags" id="video-tags" multiple required></select>
             </div>
             <input type="file" id="video-img" name="thumbnail" accept="image/*" required>
             <!-- Make thumbnail optional, to pick up the first frame of video if not present -->
