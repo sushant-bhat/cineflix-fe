@@ -2,8 +2,13 @@ let loginForm = document.getElementById("login-form")
 if (loginForm) {
     loginForm.addEventListener("submit", async (e) => {
         e.preventDefault()
-        const username = document.getElementById("username").value
+        const username = document.getElementById("username").value.trim()
         const password = document.getElementById("password").value
+
+        if (!username || !password) {
+            document.getElementById("login-msg").innerHTML = '<i class="fa-solid fa-circle-exclamation" style="color: #e82626;"></i> Credentials missing'
+            return
+        }
     
         try {
             const response = await fetch('http://localhost:8080/api/v1/user/login', {
@@ -20,7 +25,7 @@ if (loginForm) {
             if (!response.ok) {
                 console.log(`Login failed: ${response.status}`)
                 if (response.status == 401) {
-                    document.getElementById("login-msg").innerHTML = "Incorrect credentials!! Please try again"
+                    document.getElementById("login-msg").innerHTML = '<i class="fa-solid fa-circle-exclamation" style="color: #e82626;"></i> Incorrect credentials. Please try again'
                 }
                 return
             }
@@ -40,8 +45,13 @@ let registerForm = document.getElementById("register-form")
 if (registerForm) {
     registerForm.addEventListener("submit", async (e) => {
         e.preventDefault()
-        const username = document.getElementById("username").value
+        const username = document.getElementById("username").value.trim()
         const password = document.getElementById("password").value
+
+        if (username === "" || password === "") {
+            document.getElementById("register-msg").innerHTML = '<i class="fa-solid fa-circle-exclamation" style="color: #e82626;"></i> Credentials missing'
+            return
+        }
 
         try {
             const response = await fetch('http://localhost:8080/api/v1/user/register', {

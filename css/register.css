@@ -1,0 +1,16 @@
+main {
+    min-height: 100vh;
+    display: flex;
+    gap: 2em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#register-form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 25rem;
+    gap: 1em;
+}

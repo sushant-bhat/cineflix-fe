@@ -8,9 +8,14 @@ let navLinks = document.getElementById("nav-links")
 if (navLinks) {
     let categoriesNav = document.createElement("li")
     let categoriesLink = document.createElement("a")
-    categoriesLink.innerHTML = "Categories"
+    categoriesLink.innerHTML = 'Categories <i class="fa-solid fa-angle-down"></i>'
     categoriesLink.addEventListener("click", () => {
         document.getElementById("cat-list").classList.toggle("hidden")
+        if (document.getElementById("cat-list").classList.contains("hidden")) {
+            categoriesLink.innerHTML = 'Categories <i class="fa-solid fa-angle-down"></i>'
+        } else {
+            categoriesLink.innerHTML = 'Categories <i class="fa-solid fa-angle-up"></i>'
+        }
     })
     categoriesNav.appendChild(categoriesLink)
     let categoryList = document.createElement("ul")
@@ -32,7 +37,7 @@ if (navLinks) {
         let uploadNav = document.createElement("li")
         let uploadLink = document.createElement("a")
         uploadLink.href = "/pages/uploadform.html"
-        uploadLink.innerHTML = "+Upload"
+        uploadLink.innerHTML = '<i class="fa-solid fa-upload"></i> Upload'
         uploadNav.appendChild(uploadLink)
         navLinks.appendChild(uploadNav)
     }
@@ -79,11 +84,13 @@ async function generateCategoryLinks(categoryList) {
 
 async function generateVideoTile(videoInfo, atoken) {
     let li = document.createElement("li")
+    li.classList.add("video-tile")
 
     let anchor = document.createElement("a")
     anchor.setAttribute("href", `/pages/video.html?id=${encodeURIComponent(videoInfo.videoId)}`)
 
     let image = document.createElement("img")
+    image.classList.add("video-tile-thumb")
     await fetch(`http://localhost:8080/api/v1/video/${videoInfo.videoId}/thumb`, {
             headers: {
                 "Authorization": `Bearer ${atoken}`
@@ -100,11 +107,11 @@ async function generateVideoTile(videoInfo, atoken) {
     heading.innerHTML = videoInfo.videoTitle
     anchor.appendChild(heading)
 
+    li.appendChild(anchor)
+
     let addBtn = document.createElement("button")
     addBtn.classList.add("add-btn")
-    addBtn.innerHTML = "+ Add"
-    anchor.appendChild(addBtn)
-
-    li.appendChild(anchor)
+    addBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Add'
+    li.appendChild(addBtn)
     return li
 }

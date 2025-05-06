@@ -1,23 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Mukta", sans-serif;
 }
 
-.hidden {
-    display: none;
-}
+/* ----------------------------------------------------------Basic element requirements---------------------------------------------------------------- */
 
-#main-logo {
-    width: 32px;
-}
-
-#search-logo {
-    width: 24px;
+body {
+    background-color: antiquewhite;
 }
 
 h2 {
     margin-bottom: 1em;
+}
+
+a {
+    color: cornflowerblue;
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+.form-a {
+    color: cornflowerblue;
 }
 
 main {
@@ -26,7 +36,57 @@ main {
 }
 
 button {
+    padding-block: 0.5em;
+    padding-inline: 1em;
+    cursor: pointer;
+    background-color: cornflowerblue;
+    border: 1px solid black;
+    border-radius: 0.5em;
+    transition: box-shadow 0.3s ease;
+    width: fit-content;
+    margin: auto;
+}
+
+button:hover {
+    box-shadow: 2px 3px 2px rgba(128, 128, 128, 0.523);
+}
+
+select {
     padding: 0.5em;
+    cursor: pointer;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.758);
+    border-radius: 0.5em;
+}
+
+select,
+::picker(select) {
+    appearance: base-select;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em;
+}
+
+select::picker-icon {
+    color: #636363;
+    transition: 0.4s rotate;
+}
+
+select:open::picker-icon {
+    rotate: 180deg;
+}
+
+input {
+    padding-inline: 0.8em;
+    padding-block: 0.4em;
+    border: 1px solid rgba(0, 0, 0, 0.057);
+    border-radius: 0.5em;
+    opacity: 0.5;
+}
+
+input:focus {
+    outline: 0;
+    opacity: 1;
 }
 
 section {
@@ -52,14 +112,35 @@ nav {
     gap: 2rem;
 }
 
+/* ----------------------------------------------------------Common function elements across the site---------------------------------------------------------- */
+
+
+.hidden {
+    display: none;
+}
+
+.selected {
+    display: block;
+}
+
+.video-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    text-align: center;
+}
+
+/* ----------------------------------------------------------Same elements used across the site---------------------------------------------------------------- */
+
 #nav-search {
     display: flex;
     gap: 0.5em;
     justify-content: space-around;
+    align-items: center;
     padding-right: 2em;
     padding-left: 1em;
     padding-block: 0.5em;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.243);
     border-radius: 2em;
 }
 
@@ -70,6 +151,15 @@ nav {
     gap: 2rem;
 }
 
+#nav-links > li > a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#nav-links > li > a:hover {
+    text-decoration: underline;
+}
+
 #nav-search-q {
     border: none;
     font-size: 1rem;
@@ -77,4 +167,15 @@ nav {
 
 #nav-search-q:focus {
     outline: none;
+}
+
+.video-tile {
+    padding: 1em;
+    border: 1px solid black;
+    border-radius: 1em;
+}
+
+.video-tile-thumb {
+    max-width: 100%;
+    height: auto;
 }

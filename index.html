@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <title>Cineflix</title>
 </head>
 <body>
     <header>
-        <img id="main-logo" src="/images/logo.png" alt="Cineflix Logo">
+        <a href="/"><i class="fa-solid fa-film fa-2xl"></i></a>
         <nav id="nav">
             <div id="nav-search">
-                <img id="search-logo" src="/images/search.png" alt="Search icon">
+                <i class="fa-brands fa-searchengin fa-xl" style="color: #6495ed;"></i>
                 <input id="nav-search-q" type="text" placeholder="Search..." autocomplete="off">
             </div>
             <ul id="nav-links"></ul>
@@ -20,20 +22,20 @@
     <main>
         <section id="hero-section">
             <ul>
-                <li><img src="/images/heroimg.jpg" class="hero-img selected" alt=""></li>
-                <li><img src="/images/heroimg.jpg" class="hero-img" alt=""></li>
-                <li><img src="/images/heroimg.jpg" class="hero-img" alt=""></li>
+                <li><img src="/images/heroimg.jpg" class="hero-img hidden selected" alt=""></li>
+                <li><img src="/images/heroimg.jpg" class="hero-img hidden" alt=""></li>
+                <li><img src="/images/heroimg.jpg" class="hero-img hidden" alt=""></li>
             </ul>
         </section>
         <section id="content-section">
             <div id="continue-watching-stack">
-                <h2>Continue Watching...</h2>
-                <ul id="continue-watching-items">
+                <h2>Continue Watching</h2>
+                <ul id="continue-watching-items" class="video-grid">
                 </ul>
             </div>
             <div id="rec-stack">
-                <h2>You may also like...</h2>
-                <ul id="rec-items">
+                <h2>You may also like</h2>
+                <ul id="rec-items" class="video-grid">
                 </ul>
             </div>
                 
