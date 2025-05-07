@@ -1,8 +1,21 @@
-@import url(main.css);
+input::file-selector-button {
+    padding-block: 0.5em;
+    padding-inline: 1em;
+    cursor: pointer;
+    background-color: cornflowerblue;
+    border: 1px solid black;
+    border-radius: 0.5em;
+    transition: box-shadow 0.3s ease;
+    width: fit-content;
+}
 
+#upload-form-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 8rem;
+}
 
 #upload-form {
-    margin-top: 5rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;

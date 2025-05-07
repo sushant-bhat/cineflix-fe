@@ -7,14 +7,15 @@ if (!atoken) {
 let navLinks = document.getElementById("nav-links")
 if (navLinks) {
     let categoriesNav = document.createElement("li")
+    categoriesNav.setAttribute("id", "cat-nav")
     let categoriesLink = document.createElement("a")
-    categoriesLink.innerHTML = 'Categories <i class="fa-solid fa-angle-down"></i>'
+    categoriesLink.innerHTML = 'CATEGORIES <i class="fa-solid fa-angle-down"></i>'
     categoriesLink.addEventListener("click", () => {
         document.getElementById("cat-list").classList.toggle("hidden")
         if (document.getElementById("cat-list").classList.contains("hidden")) {
-            categoriesLink.innerHTML = 'Categories <i class="fa-solid fa-angle-down"></i>'
+            categoriesLink.innerHTML = 'CATEGORIES <i class="fa-solid fa-angle-down"></i>'
         } else {
-            categoriesLink.innerHTML = 'Categories <i class="fa-solid fa-angle-up"></i>'
+            categoriesLink.innerHTML = 'CATEGORIES <i class="fa-solid fa-angle-up"></i>'
         }
     })
     categoriesNav.appendChild(categoriesLink)
@@ -37,13 +38,13 @@ if (navLinks) {
         let uploadNav = document.createElement("li")
         let uploadLink = document.createElement("a")
         uploadLink.href = "/pages/uploadform.html"
-        uploadLink.innerHTML = '<i class="fa-solid fa-upload"></i> Upload'
+        uploadLink.innerHTML = '<i class="fa-solid fa-upload"></i> UPLOAD'
         uploadNav.appendChild(uploadLink)
         navLinks.appendChild(uploadNav)
     }
 
     let logoutBtn = document.createElement("button")
-    logoutBtn.innerHTML = "Logout"
+    logoutBtn.innerHTML = "LOGOUT"
     logoutBtn.addEventListener("click", () => {
         localStorage.clear()
         window.location.href = "/pages/login.html"
@@ -62,56 +63,67 @@ if (searchBar) {
 }
 
 async function generateCategoryLinks(categoryList) {
-    await fetch(`http://localhost:8080/category`, {
-        headers: {
-            "Authorization": `Bearer ${atoken}`
-        }
-    })
-    .then(resp => resp.json())
-    .then(data => {
-        data.categories.forEach(element => {
-            let catItem = document.createElement("li")
-            let catAnchor = document.createElement("a")
-            catAnchor.href = `/pages/catresults.html?cat=${element.name}`
-            catAnchor.innerHTML = element.name
-            catItem.appendChild(catAnchor)
-        
-            categoryList.appendChild(catItem)
+    await fetch(`http://localhost:9000/category`, {
+            headers: {
+                "Authorization": `Bearer ${atoken}`
+            }
         })
-    })
+        .then(resp => resp.json())
+        .then(data => {
+            data.categories.forEach(element => {
+                let catItem = document.createElement("li")
+                let catAnchor = document.createElement("a")
+                catAnchor.href = `/pages/catresults.html?cat=${element.name}`
+                catAnchor.innerHTML = element.name
+                catItem.appendChild(catAnchor)
+
+                categoryList.appendChild(catItem)
+            })
+        })
 
 }
 
 async function generateVideoTile(videoInfo, atoken) {
-    let li = document.createElement("li")
-    li.classList.add("video-tile")
 
     let anchor = document.createElement("a")
+    anchor.classList.add("video-anchor")
     anchor.setAttribute("href", `/pages/video.html?id=${encodeURIComponent(videoInfo.videoId)}`)
 
-    let image = document.createElement("img")
-    image.classList.add("video-tile-thumb")
-    await fetch(`http://localhost:8080/api/v1/video/${videoInfo.videoId}/thumb`, {
+    // let image = document.createElement("img")
+    // image.classList.add("video-tile-thumb")
+
+    let videoTile = document.createElement("li")
+    videoTile.classList.add("video-tile")
+    
+    await fetch(`http://localhost:9000/api/v1/video/${videoInfo.videoId}/thumb`, {
             headers: {
                 "Authorization": `Bearer ${atoken}`
             }
         }).then(response => response.blob())
         .then(blob => {
-            const imageUrl = URL.createObjectURL(blob);
-            image.src = imageUrl;
+            const imageUrl = URL.createObjectURL(blob)
+            videoTile.style.backgroundImage = `url(${imageUrl})`
+            // image.src = imageUrl;
         })
-    image.classList.add("thumbnail-img")
-    anchor.appendChild(image)
+    // image.classList.add("thumbnail-img")
 
-    let heading = document.createElement("h3")
-    heading.innerHTML = videoInfo.videoTitle
-    anchor.appendChild(heading)
+    anchor.appendChild(videoTile)
 
-    li.appendChild(anchor)
+    // let heading = document.createElement("h3")
+    // heading.innerHTML = videoInfo.videoTitle
+    // anchor.appendChild(heading)
+
+    // li.appendChild(anchor)
 
     let addBtn = document.createElement("button")
-    addBtn.classList.add("add-btn")
-    addBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Add'
-    li.appendChild(addBtn)
-    return li
+    addBtn.classList.add("fav-btn")
+    addBtn.innerHTML = '<i class="fa-regular fa-heart fa-2xl"></i>'
+    addBtn.addEventListener("click", (e) => {
+        // e.stopPropagation()
+        e.preventDefault()
+        addBtn.innerHTML = '<i class="fa-solid fa-heart fa-2xl"></i>'
+    })
+    anchor.appendChild(addBtn)
+
+    return anchor
 }

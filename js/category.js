@@ -6,7 +6,7 @@ window.onload = () => {
 
     console.log(cat)
     if (cat) {
-        fetch(`http://localhost:8080/browse/${cat}`, {
+        fetch(`http://localhost:9000/browse/${cat}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${atoken}` // optional if your endpoint is protected
@@ -15,10 +15,16 @@ window.onload = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            const searchresults = document.getElementById("cat-result-items");
+            const catResultsHeading = document.getElementById("cat-result-heading")
+            if (!data || !data.modules || data.modules.length === 0 || !data.modules[0].videoList || data.modules[0].videoList.length === 0) {
+                catResultsHeading.innerText = `Sorry, no results found for ${cat}`
+            } else {
+                catResultsHeading.innerText = `Results for ${cat}`
+            }
+            const catResults = document.getElementById("cat-result-items")
             data.modules[0].videoList.forEach(async videoInfo => {
                 let videoTile = await generateVideoTile(videoInfo, atoken)
-                searchresults.appendChild(videoTile)
+                catResults.appendChild(videoTile)
             })
         })
     }

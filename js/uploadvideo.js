@@ -1,7 +1,7 @@
 window.onload = async () => {
   const atoken = localStorage.getItem("atoken")
 
-  await fetch(`http://localhost:8080/category`, {
+  await fetch(`http://localhost:9000/category`, {
       headers: {
         "Authorization": `Bearer ${atoken}`
       }
@@ -42,7 +42,7 @@ document.getElementById('upload-form').addEventListener('submit', async (e) => {
 
     const atoken = localStorage.getItem("atoken")
 
-    const response = await fetch('http://localhost:8080/api/v1/video', {
+    const response = await fetch('http://localhost:9000/api/v1/video', {
       method: 'POST',
       headers: {
         "Authorization": `Bearer ${atoken}`

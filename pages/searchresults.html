@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/searchresults.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <title>Cineflix</title>
 </head>
@@ -12,15 +13,18 @@
         <a href="/"><i class="fa-solid fa-film fa-2xl"></i></a>
         <nav id="nav">
             <div id="nav-search">
-                <i class="fa-brands fa-searchengin fa-xl" style="color: #6495ed;"></i>
-                <input id="nav-search-q" type="text" placeholder="Search..." autocomplete="off">
+                <label for="nav-search-q"><i class="fa-brands fa-searchengin fa-xl" style="color: #6495ed;"></i></label>
+                <input id="nav-search-q" type="text" name="nav-search-q" placeholder="SEARCH" autocomplete="off">
             </div>
             <ul id="nav-links"></ul>
         </nav>
     </header>
     <main>
-        <ul id="search-result-items">
-        </ul>
+        <section id="search-results-section">
+            <h1 id="search-result-heading">Results for </h1>
+            <ul id="search-result-items" class="video-grid">
+            </ul>
+        </section>
     </main>
 </body>
 <script src="/js/common.js"></script>

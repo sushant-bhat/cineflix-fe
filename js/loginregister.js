@@ -6,12 +6,14 @@ if (loginForm) {
         const password = document.getElementById("password").value
 
         if (!username || !password) {
-            document.getElementById("login-msg").innerHTML = '<i class="fa-solid fa-circle-exclamation" style="color: #e82626;"></i> Credentials missing'
+            const loginMsg = document.getElementById("login-msg")
+            loginMsg.classList.remove("hidden")
+            loginMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="color: #e82626;"></i> Credentials missing'
             return
         }
     
         try {
-            const response = await fetch('http://localhost:8080/api/v1/user/login', {
+            const response = await fetch('http://localhost:9000/api/v1/user/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -49,12 +51,14 @@ if (registerForm) {
         const password = document.getElementById("password").value
 
         if (username === "" || password === "") {
-            document.getElementById("register-msg").innerHTML = '<i class="fa-solid fa-circle-exclamation" style="color: #e82626;"></i> Credentials missing'
+            const registerMsg = document.getElementById("register-msg")
+            registerMsg.classList.remove("hidden")
+            registerMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="color: #e82626;"></i> Credentials missing'
             return
         }
 
         try {
-            const response = await fetch('http://localhost:8080/api/v1/user/register', {
+            const response = await fetch('http://localhost:9000/api/v1/user/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

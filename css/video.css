@@ -1,0 +1,9 @@
+#hls-video {
+    width: 100%;
+    height: 80vh;
+}
+
+#video-info-section {
+    width: 80%;
+    margin: auto;
+}

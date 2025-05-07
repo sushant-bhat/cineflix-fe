@@ -1,5 +1,18 @@
-.hero-img {
-    width: 100%;
+#landing-page {
+    margin-top: 0;
+}
+
+#hero-section {
+    background-image: url(/images/hero-img.jpg);
+    height: min(100dvh, 60rem);
+    background-position: center;
+    background-size: cover;
+    background-color: black;
+}
+
+#content-section {
+    width: 80%;
+    margin: auto;
 }
 
 #continue-watching-stack {

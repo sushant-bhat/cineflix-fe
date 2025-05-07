@@ -19,7 +19,7 @@ function prepareVideoPlayer(videoId, atoken) {
     if (Hls.isSupported()) {
         var video = document.getElementById('hls-video');
         // to-do: Make the poster and streaming file endpoint come from backend to make it dynamic
-        fetch(`http://localhost:8080/api/v1/video/${videoId}/thumb`, {
+        fetch(`http://localhost:9000/api/v1/video/${videoId}/thumb`, {
                 headers: {
                     "Authorization": `Bearer ${atoken}`
                 }
@@ -28,17 +28,17 @@ function prepareVideoPlayer(videoId, atoken) {
                 const imageUrl = URL.createObjectURL(blob);
                 video.setAttribute("poster", imageUrl)
             })
-        // video.setAttribute("poster", `http://localhost:8080/api/v1/video/${videoId}/thumb`)
+        // video.setAttribute("poster", `http://localhost:9000/api/v1/video/${videoId}/thumb`)
         var hls = new Hls({
             xhrSetup: function (xhr, url) {
                 xhr.setRequestHeader("Authorization", `Bearer ${atoken}`);
             }
         });
-        hls.loadSource(`http://localhost:8080/api/v1/video/${videoId}/master.m3u8`);
+        hls.loadSource(`http://localhost:9000/api/v1/video/${videoId}/master.m3u8`);
         hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, function () {
-            video.play();
-        });
+        // hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        //     video.play();
+        // });
         hls.on(Hls.Events.ERROR, function (event, data) {
             if (data.fatal) {
                 switch (data.type) {
@@ -58,7 +58,7 @@ function prepareVideoPlayer(videoId, atoken) {
         });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         // Native HLS support found
-        video.src = `http://localhost:8080/api/v1/video/${videoId}/master.m3u8`;
+        video.src = `http://localhost:9000/api/v1/video/${videoId}/master.m3u8`;
         video.addEventListener('loadedmetadata', function () {
             video.play();
         });
@@ -66,7 +66,7 @@ function prepareVideoPlayer(videoId, atoken) {
 }
 
 async function populateVideoInfo(videoId, atoken) {
-    const response = await fetch(`http://localhost:8080/api/v1/video/${videoId}`, {
+    const response = await fetch(`http://localhost:9000/api/v1/video/${videoId}`, {
         headers: {
             "Authorization": `Bearer ${atoken}`
         }
@@ -77,7 +77,7 @@ async function populateVideoInfo(videoId, atoken) {
         console.error("Something went wrong while fetching video details")
     } else {
         const videoMeta = result.videoMeta
-        let videoInfo = document.getElementById("video-info")
+        let videoInfo = document.getElementById("video-info-section")
 
         let heading = document.createElement("h1")
         heading.innerHTML = videoMeta.videoTitle

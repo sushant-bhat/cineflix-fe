@@ -3,7 +3,7 @@ let moduleData = {}
 window.onload = () => {
     const atoken = localStorage.getItem("atoken")
 
-    fetch('http://localhost:8080/home', {
+    fetch('http://localhost:9000/home', {
             headers: {
                 "Authorization": `Bearer ${atoken}`
             }
@@ -25,7 +25,21 @@ window.onload = () => {
 function updateHomeFeed(data, atoken) {
     data.modules.forEach(module => {
         moduleData[module["moduleId"]] = module["videoList"]
-    });
+    })
+
+    // const heroSectionItems = []
+    let heroSection = document.getElementById("hero-section")
+    moduleData["HERO"].forEach(async videoInfo => {
+        await fetch(`http://localhost:9000/api/v1/video/${videoInfo.videoId}/thumb`, {
+                headers: {
+                    "Authorization": `Bearer ${atoken}`
+                }
+            }).then(response => response.blob())
+            .then(blob => {
+                const imageUrl = URL.createObjectURL(blob)
+                // heroSection.style.backgroundImage = `url(${imageUrl})`
+            })
+    })
 
     let continueSection = document.getElementById("continue-watching-items")
     moduleData["CONTINUE"].forEach(async videoInfo => {

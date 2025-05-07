@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/uploadform.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <title>Cineflix</title>
@@ -12,25 +13,32 @@
         <a href="/"><i class="fa-solid fa-film fa-2xl"></i></a>
         <nav id="nav">
             <div id="nav-search">
-                <i class="fa-brands fa-searchengin fa-xl" style="color: #6495ed;"></i>
-                <input id="nav-search-q" type="text" placeholder="Search..." autocomplete="off">
+                <label for="nav-search-q"><i class="fa-brands fa-searchengin fa-xl" style="color: #6495ed;"></i></label>
+                <input id="nav-search-q" type="text" name="nav-search-q" placeholder="SEARCH" autocomplete="off">
             </div>
             <ul id="nav-links"></ul>
         </nav>
     </header>
     <main>
+        <h1 id="upload-form-title">UPLOAD FORM</h1>
         <form id="upload-form" method="post" enctype="multipart/form-data">
-            <input type="text" name="videoTitle" id="video-title" placeholder="Title" required>
-            <textarea name="videoDescription" id="video-descr" rows="10" placeholder="Description..." required></textarea>
-            <textarea name="videoCast" id="video-cast" rows="10" placeholder="Enter each actor name on separate line..." required></textarea>
-            <input type="text" name="videoDirector" id="video-director" placeholder="Director Name..." required/>
+            <input type="text" name="videoTitle" id="video-title" placeholder="TITLE" required>
+            <textarea name="videoDescription" id="video-descr" rows="10" placeholder="DESCRIPTION" required></textarea>
+            <textarea name="videoCast" id="video-cast" rows="10" placeholder="ACTOR NAMES ON SEPARATE LINES" required></textarea>
+            <input type="text" name="videoDirector" id="video-director" placeholder="DIRECTOR" required/>
             <div>
                 <label for="video-tags">Select tags:</label>
                 <select name="videoTags" id="video-tags" multiple required></select>
             </div>
-            <input type="file" id="video-img" name="thumbnail" accept="image/*" required>
+            <div>
+                <label for="thumbnail">Thumbnail:</label>
+                <input type="file" id="video-img" name="thumbnail" accept="image/*" required>
+            </div>
             <!-- Make thumbnail optional, to pick up the first frame of video if not present -->
-            <input type="file" id="video-vid" name="file" accept="video/*" required>
+             <div>
+                <label for="file">Video File:</label>
+                <input type="file" id="video-vid" name="file" accept="video/*" required>
+             </div>
             <button type="submit">Upload</button>
         </form>
     </main>

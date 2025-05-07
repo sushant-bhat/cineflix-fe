@@ -1,0 +1,10 @@
+#search-results-section {
+    width: 80%;
+    margin: auto;
+    margin-top: 10rem;
+}
+
+#search-result-heading     {
+    font-size: 2.5rem;
+    margin-bottom: 2em;
+}
