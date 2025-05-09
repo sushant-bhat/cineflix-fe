@@ -23,7 +23,7 @@ window.onload = () => {
             }
             const catResults = document.getElementById("cat-result-items")
             data.modules[0].videoList.forEach(async videoInfo => {
-                let videoTile = await generateVideoTile(videoInfo, atoken)
+                let videoTile = await generateVideoTile(videoInfo, false, atoken)
                 catResults.appendChild(videoTile)
             })
         })

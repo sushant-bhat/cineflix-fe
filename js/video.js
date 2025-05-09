@@ -67,7 +67,7 @@ async function prepareVideoPlayer(videoId, atoken) {
 
 async function setVideoAttributes(video, atoken) {
     // to-do: Make the poster and streaming file endpoint come from backend to make it dynamic
-    await fetch(`http://localhost:9000/api/v1/video/${videoId}/thumb`, {
+    await fetch(`http://localhost:9000/api/v1/video/${videoId}/cover`, {
             headers: {
                 "Authorization": `Bearer ${atoken}`
             }
@@ -97,11 +97,14 @@ async function setVideoAttributes(video, atoken) {
         const duration = Math.floor(video.duration)
 
         console.log(`Got time update: ${currentTime} out of ${duration}`)
-        if (currentTime - lastSavedTime >= saveInterval) {
+        let timePassed = currentTime - lastSavedTime
+        if (timePassed < 0 || timePassed >= saveInterval) {
             lastSavedTime = currentTime;
             await saveProgress(videoId, currentTime, duration, atoken)
         }
-    });
+    })
+
+    video.volume = 0.2
 }
 
 async function saveProgress(videoId, lastWatched, duration, atoken) {

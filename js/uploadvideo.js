@@ -21,7 +21,8 @@ document.getElementById('upload-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const videoFile = document.getElementById('video-vid').files[0]
-  const thumbnailFile = document.getElementById('video-img').files[0]
+  const thumbnailFile = document.getElementById('video-thumb').files[0]
+  const coverFile = document.getElementById('video-cover').files[0]
 
   const metadata = {
     videoTitle: document.getElementById('video-title').value,
@@ -34,6 +35,7 @@ document.getElementById('upload-form').addEventListener('submit', async (e) => {
   const formData = new FormData();
   formData.append('file', videoFile);
   formData.append('thumbnail', thumbnailFile);
+  formData.append('cover', coverFile);
   formData.append('video', new Blob([JSON.stringify(metadata)], {
     type: 'application/json'
   }))

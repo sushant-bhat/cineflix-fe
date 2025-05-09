@@ -92,6 +92,8 @@ async function generateVideoTile(videoInfo, showProgress, atoken) {
     let videoTile = document.createElement("li")
     videoTile.classList.add("video-tile")
 
+    console.log("Getting thumbnail with token " + atoken)
+
     await fetch(`http://localhost:9000/api/v1/video/${videoInfo.videoId}/thumb`, {
             headers: {
                 "Authorization": `Bearer ${atoken}`

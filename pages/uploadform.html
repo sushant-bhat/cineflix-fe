@@ -31,12 +31,16 @@
                 <select name="videoTags" id="video-tags" multiple required></select>
             </div>
             <div>
-                <label for="thumbnail">Thumbnail:</label>
-                <input type="file" id="video-img" name="thumbnail" accept="image/*" required>
+                <label for="thumbnail">Video Thumbnail:</label>
+                <input type="file" id="video-thumb" name="thumbnail" accept="image/*" required>
+            </div>
+            <div>
+                <label for="thumbnail">Video Cover:</label>
+                <input type="file" id="video-cover" name="cover" accept="image/*" required>
             </div>
             <!-- Make thumbnail optional, to pick up the first frame of video if not present -->
              <div>
-                <label for="file">Video File:</label>
+                <label for="file">Video Raw File:</label>
                 <input type="file" id="video-vid" name="file" accept="video/*" required>
              </div>
             <button type="submit">Upload</button>

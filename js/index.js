@@ -47,6 +47,14 @@ function updateHomeFeed(data, atoken) {
         continueSection.appendChild(videoTile)
     })
 
+    let watchlistSection = document.getElementById("watchlist-items")
+    if (watchlistSection && moduleData["WATCHLIST"]) {
+        moduleData["WATCHLIST"].forEach(async videoInfo => {
+            let videoTile = await generateVideoTile(videoInfo, false, atoken)
+            watchlistSection.appendChild(videoTile)
+        })
+    }
+
     let recSection = document.getElementById("rec-items")
     moduleData["RECOM"].forEach(async videoInfo => {
         let videoTile = await generateVideoTile(videoInfo, false, atoken)

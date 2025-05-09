@@ -20,7 +20,7 @@ window.onload = () => {
             searchResultsHeading.innerText = `Results for ${query}`
             const searchresults = document.getElementById("search-result-items");
             data.modules[0].videoList.forEach(async videoInfo => {
-                let videoTile = await generateVideoTile(videoInfo, atoken)
+                let videoTile = await generateVideoTile(videoInfo, false, atoken)
                 searchresults.appendChild(videoTile)
             })
         })
