@@ -83,18 +83,15 @@ async function generateCategoryLinks(categoryList) {
 
 }
 
-async function generateVideoTile(videoInfo, atoken) {
+async function generateVideoTile(videoInfo, showProgress, atoken) {
 
     let anchor = document.createElement("a")
     anchor.classList.add("video-anchor")
     anchor.setAttribute("href", `/pages/video.html?id=${encodeURIComponent(videoInfo.videoId)}`)
 
-    // let image = document.createElement("img")
-    // image.classList.add("video-tile-thumb")
-
     let videoTile = document.createElement("li")
     videoTile.classList.add("video-tile")
-    
+
     await fetch(`http://localhost:9000/api/v1/video/${videoInfo.videoId}/thumb`, {
             headers: {
                 "Authorization": `Bearer ${atoken}`
@@ -103,27 +100,30 @@ async function generateVideoTile(videoInfo, atoken) {
         .then(blob => {
             const imageUrl = URL.createObjectURL(blob)
             videoTile.style.backgroundImage = `url(${imageUrl})`
-            // image.src = imageUrl;
         })
-    // image.classList.add("thumbnail-img")
+
+    await fetch(`http://localhost:9000/api/v1/video/${videoInfo.videoId}/progress`, {
+            headers: {
+                "Authorization": `Bearer ${atoken}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data && data.videoProgressDetails.lastWatched !== undefined && showProgress) {
+                const watchedTime = data.videoProgressDetails.lastWatched
+                console.log(`watched time: ${watchedTime}, duration: ${data.videoProgressDetails.duration}`)
+                let progress = Math.floor(watchedTime * 100 / data.videoProgressDetails.duration)
+                console.log("Setting progress: " + progress)
+    
+                let videoProg = document.createElement("progress")
+                videoProg.classList.add("video-prog")
+                videoProg.max = "100"
+                videoProg.value = progress
+                videoTile.appendChild(videoProg)
+            }
+        })
 
     anchor.appendChild(videoTile)
-
-    // let heading = document.createElement("h3")
-    // heading.innerHTML = videoInfo.videoTitle
-    // anchor.appendChild(heading)
-
-    // li.appendChild(anchor)
-
-    let addBtn = document.createElement("button")
-    addBtn.classList.add("fav-btn")
-    addBtn.innerHTML = '<i class="fa-regular fa-heart fa-2xl"></i>'
-    addBtn.addEventListener("click", (e) => {
-        // e.stopPropagation()
-        e.preventDefault()
-        addBtn.innerHTML = '<i class="fa-solid fa-heart fa-2xl"></i>'
-    })
-    anchor.appendChild(addBtn)
 
     return anchor
 }

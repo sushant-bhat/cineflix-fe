@@ -43,13 +43,13 @@ function updateHomeFeed(data, atoken) {
 
     let continueSection = document.getElementById("continue-watching-items")
     moduleData["CONTINUE"].forEach(async videoInfo => {
-        let videoTile = await generateVideoTile(videoInfo, atoken)
+        let videoTile = await generateVideoTile(videoInfo, true, atoken)
         continueSection.appendChild(videoTile)
     })
 
     let recSection = document.getElementById("rec-items")
     moduleData["RECOM"].forEach(async videoInfo => {
-        let videoTile = await generateVideoTile(videoInfo, atoken)
+        let videoTile = await generateVideoTile(videoInfo, false, atoken)
         recSection.appendChild(videoTile)
     })
 }
