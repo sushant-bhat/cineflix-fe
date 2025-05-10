@@ -30,14 +30,14 @@ function updateHomeFeed(data, atoken) {
     // const heroSectionItems = []
     let heroSection = document.getElementById("hero-section")
     moduleData["HERO"].forEach(async videoInfo => {
-        await fetch(`http://localhost:9000/api/v1/video/${videoInfo.videoId}/thumb`, {
+        await fetch(`http://localhost:9000/api/v1/video/${videoInfo.videoId}/cover`, {
                 headers: {
                     "Authorization": `Bearer ${atoken}`
                 }
             }).then(response => response.blob())
             .then(blob => {
                 const imageUrl = URL.createObjectURL(blob)
-                // heroSection.style.backgroundImage = `url(${imageUrl})`
+                heroSection.style.backgroundImage = `url(${imageUrl})`
             })
     })
 

@@ -10,6 +10,7 @@
 /* ----------------------------------------------------------Basic element requirements---------------------------------------------------------------- */
 
 body {
+    position: relative;
     background-color: antiquewhite;
 }
 
@@ -18,7 +19,7 @@ h2 {
 }
 
 a {
-    color: cornflowerblue;
+    color: white;
     text-decoration: none;
 }
 
@@ -40,6 +41,7 @@ button {
     padding-inline: 1em;
     cursor: pointer;
     background-color: cornflowerblue;
+    font-weight: 600;
     border: 1px solid black;
     border-radius: 0.5em;
     transition: box-shadow 0.3s ease;
@@ -110,10 +112,13 @@ header {
     position: fixed;
     top: 0;
     left: 0;
+    right: 0;
     display: flex;
-    width: 100%;
-    justify-content: space-around;
-    /* margin-inline: 2rem; */
+    z-index: 10;
+    justify-content: space-between;
+    color: white;
+    background-image: linear-gradient(black, transparent);
+    padding-inline: 2rem;
     align-items: center;
     padding-block: 1rem;
 }
@@ -169,6 +174,7 @@ nav {
 
 #nav-links > li > a {
     text-decoration: none;
+    font-weight: 600;
     cursor: pointer;
 }
 
