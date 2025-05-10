@@ -117,10 +117,26 @@ header {
     z-index: 10;
     justify-content: space-between;
     color: white;
-    background-image: linear-gradient(black, transparent);
+    background: linear-gradient(black, transparent);
     padding-inline: 2rem;
     align-items: center;
     padding-block: 1rem;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: black;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: -10;
+}
+
+header.moved::before {
+    opacity: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 nav {

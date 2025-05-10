@@ -4,6 +4,18 @@ if (!atoken) {
     window.location.href = "/pages/login.html"
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 0) {
+            header.classList.add('moved');
+        } else {
+            header.classList.remove('moved');
+        }
+    });
+});
+
 let navLinks = document.getElementById("nav-links")
 if (navLinks) {
     let categoriesNav = document.createElement("li")
@@ -116,7 +128,7 @@ async function generateVideoTile(videoInfo, showProgress, atoken) {
                 console.log(`watched time: ${watchedTime}, duration: ${data.videoProgressDetails.duration}`)
                 let progress = Math.floor(watchedTime * 100 / data.videoProgressDetails.duration)
                 console.log("Setting progress: " + progress)
-    
+
                 let videoProg = document.createElement("progress")
                 videoProg.classList.add("video-prog")
                 videoProg.max = "100"
