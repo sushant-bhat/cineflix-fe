@@ -1,4 +1,21 @@
+document.addEventListener('DOMContentLoaded', () => {
+    fetch("http://localhost:9000/live", {
+            'Content-Type': 'text/plain'
+        })
+        .then(response => {
+            console.log(response)
+            if (!response.ok) {
+                window.location.href = "/pages/down.html"
+            }
+        })
+        .catch(err => {
+            console.log("The server is down " + err)
+            window.location.href = "/pages/down.html"
+        })
+});
+
 let loginForm = document.getElementById("login-form")
+
 if (loginForm) {
     loginForm.addEventListener("submit", async (e) => {
         e.preventDefault()
@@ -11,7 +28,7 @@ if (loginForm) {
             loginMsg.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="color: #e82626;"></i> Credentials missing'
             return
         }
-    
+
         try {
             const response = await fetch('http://localhost:9000/api/v1/user/login', {
                 method: 'POST',
@@ -23,7 +40,7 @@ if (loginForm) {
                     "password": password
                 })
             });
-    
+
             if (!response.ok) {
                 console.log(`Login failed: ${response.status}`)
                 if (response.status == 401) {
@@ -31,7 +48,7 @@ if (loginForm) {
                 }
                 return
             }
-    
+
             const result = await response.json();
             localStorage.setItem("atoken", result["jwt"])
             localStorage.setItem("username", result.userDetails.username)

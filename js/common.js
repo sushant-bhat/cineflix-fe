@@ -1,10 +1,10 @@
 const atoken = localStorage.getItem("atoken")
 
-if (!atoken) {
-    window.location.href = "/pages/login.html"
-}
-
 document.addEventListener('DOMContentLoaded', () => {
+    if (!atoken) {
+        window.location.href = "/pages/login.html"
+        return
+    }
     const header = document.querySelector('header');
 
     window.addEventListener('scroll', () => {

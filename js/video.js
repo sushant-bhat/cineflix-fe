@@ -31,14 +31,14 @@ async function prepareVideoPlayer(videoId, atoken) {
         });
         hls.loadSource(`http://localhost:9000/api/v1/video/${videoId}/master.m3u8`);
         hls.attachMedia(video);
-        // hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        //     video.addEventListener('loadedmetadata', () => {
-        //         console.log('Metadata loaded. Duration:', video.duration);
-        //         console.log('Seeking to:', lastWatched);
-        //         video.currentTime = lastWatched;
-        //         video.play();
-        //     });
-        // });
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video.addEventListener('loadedmetadata', () => {
+                console.log('Metadata loaded. Duration:', video.duration);
+                console.log('Seeking to:', lastWatched);
+                video.currentTime = lastWatched;
+                // video.play();
+            });
+        });
         hls.on(Hls.Events.ERROR, function (event, data) {
             if (data.fatal) {
                 switch (data.type) {
